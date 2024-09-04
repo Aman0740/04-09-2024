@@ -233,5 +233,61 @@ DELETE /api/v1/users/1
   - Customize the execution order and environment variables.
 
 
+## Q-4. What is JWT & Full form of JWT ?
+
+JSON Web Token (JWT) is an open standard (RFC 7519) for securely transmitting information between parties as a JSON object. JWTs are used for authentication and authorization, enabling secure data exchange between a client and a server.
+
+### Structure of a JWT
+A JWT is composed of three parts, separated by dots (`.`):
+1. **Header**: This typically consists of two parts: the type of the token, which is JWT, and the signing algorithm being used, such as HMAC SHA256 or RSA.
+   
+   ```json
+   {
+     "alg": "HS256",
+     "typ": "JWT"
+   }
+   ```
+
+2. **Payload**: This is the part of the token that contains the claims or the data you want to transmit. Claims are statements about an entity (typically, the user) and additional metadata. There are three types of claims:
+   - **Registered claims**: Predefined claims like `iss` (issuer), `exp` (expiration time), `sub` (subject), and `aud` (audience).
+   - **Public claims**: Custom claims that are agreed upon by two parties using the JWT.
+   - **Private claims**: Custom claims created to share information between parties that agree on using them.
+
+   Example payload:
+   ```json
+   {
+     "sub": "1234567890",
+     "name": "John Doe",
+     "admin": true
+   }
+   ```
+
+3. **Signature**: This is created by taking the encoded header, the encoded payload, a secret, and the algorithm specified in the header, then signing them. The purpose of the signature is to verify that the sender of the JWT is who it says it is and to ensure that the message wasn't changed along the way.
+
+   For example, using HMAC SHA256:
+   ```
+   HMACSHA256(
+     base64UrlEncode(header) + "." +
+     base64UrlEncode(payload),
+     secret)
+   ```
+
+### How JWTs Work
+- **Authentication**: When a user logs in, the server verifies their credentials and issues a JWT, which is sent to the client. The client then stores this token (usually in local storage or cookies).
+- **Authorization**: The client sends the JWT in the HTTP Authorization header when making subsequent requests. The server verifies the token and, if valid, grants access to the requested resources.
+
+### Advantages of JWT
+- **Compact**: JWTs are compact and can be sent via URLs, POST parameters, or HTTP headers.
+- **Self-contained**: JWTs contain all the required information about the user, so no additional database queries are necessary to validate the token.
+- **Secure**: If properly signed and encrypted, JWTs are secure and difficult to tamper with.
+
+JWTs are commonly used in modern web applications for stateless authentication, where the server does not need to keep track of user sessions in the database.
+
+The full form of JWT is **JSON Web Token**. 
+
+In the context of MongoDB, JWTs are often used for authentication and authorization purposes. When a user logs in, a JWT is generated and sent to the client. This token can then be used to verify the user's identity in subsequent requests to the server, allowing access to protected routes or resources. The token typically contains encoded information such as the user's ID and expiration time, and it is signed to ensure its integrity.
+
+
+
 
 
