@@ -64,7 +64,7 @@
 
 ## Q-2. Access Other Page and Data using JWT [ Using JWT set Authentication & Security ] ?
 
-## Accessing Other Pages and Data Using JWT
+# Accessing Other Pages and Data Using JWT
 
 **Understanding JWT and Its Role in Authorization**
 
